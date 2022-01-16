@@ -1,0 +1,7 @@
+<ng-container *ngFor="let p of products$ | async">
+    <div class="product">
+        <p>Наименование: {{ p.name }}</p>
+        <p>Цена за шт: {{ p.cost | number:'1.2-2'}}</p>
+        <button class="bucket-btn" (click)="addToBucket(p)">В корзину!</button>
+    </div>
+</ng-container>

@@ -1,0 +1,15 @@
+<ng-container *ngIf="bucketList.length; else elseBlock">
+    <p class="bucket-title">Товара на сумму: {{ totalCost | number:'1.2-2'}} рублей</p>
+</ng-container>
+<ng-template #elseBlock>
+    <p class="bucket-title">Корзина Пуста</p>
+</ng-template>
+<ng-container *ngFor="let b of bucketList">
+    <div class="product">
+        <p>Наименование: {{ b.product.name }}</p>
+        <p>Цена за шт: {{ b.product.cost | number:'1.2-2'}}</p>
+        <p>Количество: {{ b.quantity }}</p>
+        <button class="btn" (click)="increaseQuantity(b)">+</button>
+        <button class="btn" (click)="decreaseQuantity(b)">-</button>
+    </div>
+</ng-container>

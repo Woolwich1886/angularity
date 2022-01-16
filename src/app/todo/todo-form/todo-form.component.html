@@ -1,0 +1,13 @@
+<form [formGroup]="toDoForm" (submit)="createToDoTask()">
+    <label title="Название задания">
+        Название задания
+        <input formControlName="name">
+    </label>
+    <label title="Важность">
+        Важность
+        <select formControlName="priority">
+            <option *ngFor="let p of priorityList" [value]="p">{{ p }}</option>
+        </select>
+    </label>
+    <button type="submit">Добавить задание</button>
+</form>

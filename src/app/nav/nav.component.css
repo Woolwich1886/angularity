@@ -1,0 +1,16 @@
+:host{
+    background-color: #FF5959;
+    display: flex;
+    width: 100%;
+    height: 40px;
+}
+
+a {
+    font-family: 'Courier New', Courier, monospace;
+    color: #EEF2FF;
+    font-size: 26px;
+    padding: 5px;
+    font-style: normal;
+    text-decoration: none;
+    margin: 0 40px 0 10px;
+}

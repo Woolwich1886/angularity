@@ -1,0 +1,28 @@
+.product {
+    border: solid 2px #676FA3;
+    background-color: #CDDEFF;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    padding: 5px;
+    width: 400px;
+
+}
+
+.bucket-btn {
+    border: solid 1px #676FA3;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #676FA3;
+    color: #EEF2FF;
+    text-align: center;
+}
+
+.bucket-btn:hover {
+    background-color: #FF5959;
+}
+
+.bucket-btn:active {
+    background-color: #676FA3;
+}
