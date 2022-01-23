@@ -3,11 +3,13 @@
     background-color: #CDDEFF;
     border-radius: 5px;
     margin-top: 10px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 24px;
     padding: 5px;
     width: 400px;
+}
 
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
 }
 
 .bucket-btn {

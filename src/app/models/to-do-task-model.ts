@@ -1,10 +1,16 @@
 export interface ToDoTask {
-    //Название
+    /**
+     * Название
+     */
     name: string;
 
-    //Приоритет
+    /**
+     * Приоритет
+     */
     priority: string;
 
-    //Статус выполнения
+    /**
+     * Статус выполнения
+     */
     isDone: boolean;
 }

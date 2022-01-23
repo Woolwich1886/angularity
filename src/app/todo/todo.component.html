@@ -1,19 +1,15 @@
 <app-todo-form (addNewToDo)="addToDo($event)"></app-todo-form>
-<ng-container>
-    <button (click)="removeDone()">Убрать сделанные задания</button>
-</ng-container>
+<button (click)="removeDone()">Убрать выполненные задания</button>
 <ng-container *ngIf="toDo$ | async as _">
     <ng-container *ngIf="_.length > 0; else elseBlock">
-        <ng-container *ngFor="let d of _">
-            <div [ngClass]="[d.isDone ? 'done' : 'not-done', 'todo']">
-                <p>Задача: {{ d.name }}</p>
-                <p>Приоритет: {{ d.priority }}</p>
-                <p>Выполнена: {{ d.isDone }}</p>
-                <ng-container *ngIf="!d.isDone">
-                    <button (click)="changeToDone(d)">Выполнить</button>
-                </ng-container>
-            </div>
-        </ng-container>
+        <div *ngFor="let d of _" [ngClass]="[d.isDone ? 'done' : 'not-done', 'todo']">
+            <p>Задача: {{ d.name }}</p>
+            <p>Приоритет: {{ d.priority }}</p>
+            <p>Выполнена: {{ d.isDone }}</p>
+            <ng-container *ngIf="!d.isDone">
+                <button (click)="changeToDone(d)">Выполнить</button>
+            </ng-container>
+        </div>
     </ng-container>
     <ng-template #elseBlock>
         <p>Заданий нет</p>

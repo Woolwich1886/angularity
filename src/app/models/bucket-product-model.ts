@@ -1,10 +1,14 @@
 import { Product } from "./product-model";
 
 export interface BucketProduct {
-    //Продукт
+    /**
+     * Продукт
+     */
     product: Product;
   
-    //Количество
+    /**
+     * Количество
+     */
     quantity: number;
   }
   

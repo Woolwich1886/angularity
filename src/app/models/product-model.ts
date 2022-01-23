@@ -1,7 +1,11 @@
 export interface Product {
-    //Название
+    /**
+     * Название
+     */
     name?: string,
 
-    //Стоимость
+    /**
+     * Стоимость
+     */
     cost?: number
 }

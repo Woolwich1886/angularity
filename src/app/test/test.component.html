@@ -1,0 +1,17 @@
+<ng-container *ngIf="isFinished">
+    <p>{{ res$ | async }}</p>
+</ng-container>
+<ng-container *ngFor="let q of questions$ | async">
+    <div class="question">
+        <p>{{ q.text }}</p>
+        <div *ngFor="let a of q.answers">
+            <div class="answers">
+                <button [ngClass]="[q.choosenAnswer === a.id ? 'choose-btn' : 'btn']"
+                    (click)="chooseAnswer(q.id, a.id)">{{ a.id }}</button>
+                <li>{{ a.answerText }}</li>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<button (click)="needAnswers()">Дать ответы</button>
+<button (click)="resetAnswers()">Сбросить</button>

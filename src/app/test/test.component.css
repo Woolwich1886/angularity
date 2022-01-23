@@ -1,0 +1,21 @@
+.choose-btn {
+    background-color: #676FA3;
+}
+
+.question {
+    border: solid 2px #676FA3;
+    background-color: #CDDEFF;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.answers {
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+}

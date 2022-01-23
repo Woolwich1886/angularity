@@ -1,13 +1,25 @@
 <form [formGroup]="toDoForm" (submit)="createToDoTask()">
-    <label title="Название задания">
-        Название задания
-        <input formControlName="name">
-    </label>
-    <label title="Важность">
-        Важность
-        <select formControlName="priority">
-            <option *ngFor="let p of priorityList" [value]="p">{{ p }}</option>
-        </select>
-    </label>
+    <div class="form-control">
+        <label title="Название задания">
+            Название задания
+            <input formControlName="name">
+            <div class="errors" *ngIf="nameField?.touched && nameField?.errors">
+                <ng-container *ngIf="toDoForm.get('name')?.errors?.required">
+                    <p>*Необходимо заполнить поле!</p>
+                </ng-container>
+                <ng-container *ngIf="toDoForm.get('name')?.errors?.maxlength">
+                    <p>*Превышен лимит на буквы</p>
+                </ng-container>
+            </div>
+        </label>
+    </div>
+    <div class="form-control">
+        <label title="Важность">
+            Важность
+            <select formControlName="priority">
+                <option *ngFor="let p of priorityList" [value]="p">{{ p }}</option>
+            </select>
+        </label>
+    </div>
     <button type="submit">Добавить задание</button>
 </form>

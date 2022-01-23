@@ -1,36 +1,36 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { ShopComponent } from './shop/shop.component';
-import { NavComponent } from './nav/nav.component';
-import { RouterModule, Routes } from '@angular/router';
-import { ProductListComponent } from './shop/product-list/product-list.component';
-import { BucketComponent } from './shop/bucket/bucket.component';
-import { TodoComponent } from './todo/todo.component';
-import { TodoFormComponent } from './todo/todo-form/todo-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
+import { ShopComponent } from './shop/shop.component';
+import { ShopModule } from './shop/shop.module';
+import { TestComponent } from './test/test.component';
+import { TestModule } from './test/test.module';
+import { TodoComponent } from './todo/todo.component';
+import { TodoModule } from './todo/todo.module';
+
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'todo', component: TodoComponent },
-]
+  { path: 'test', component: TestComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShopComponent,
     NavComponent,
-    ProductListComponent,
-    BucketComponent,
-    TodoComponent,
-    TodoFormComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ShopModule,
+    TodoModule,
+    TestModule
   ],
   providers: [],
   bootstrap: [AppComponent]
