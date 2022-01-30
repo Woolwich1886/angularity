@@ -1,0 +1,32 @@
+<button class="red" (click)="isRedPushing = !isRedPushing">Red sphere</button>
+<button class="blue" (click)="isBluePushing = !isBluePushing">Blue sphere</button>
+<button class="green" (click)="isGreenPushing = !isGreenPushing">Green sphere</button>
+<div class="sphere-log">Log
+    <ng-container *ngFor="let l of logging">
+        <p>{{ l }}</p>
+    </ng-container>
+</div>
+<div class="sphere-container">Container
+    <ng-container *ngFor="let s of rxSpheres$ | async">
+        <app-numeric-sphere [sphereData]="s"></app-numeric-sphere>
+    </ng-container>
+</div>
+<button (click)="clearAndStop()">Clear and stop</button>
+<div class="rules">
+    <p>на странице есть три кнопки:</p>
+    <p>Вызывают красный синий и зелёный шар со случайным номером от 1го до 10ти соответственно
+        также есть контейнер где отображаются выпавшие шары
+        и кнопка которая читит этот контейнер
+        (TODO: внизу подбита сумма и количество по цветам)</p>
+
+    <p>допусловия:</p>
+    <ul>
+        <li>1) массив выпавших шаров (если будет) использовать только для отображения контейнера</li>
+        <li>2) если выпало три одноцветных шара, то выпадает белый</li>
+        <li>3) если выпало три разноцветных шара, то выпадает шар с цветом последнего и наибольшим числом из тех трёх
+        </li>
+        <li>4) если выпал синий и его значение больше последнего выпадавшего красного, то выпадает фиолетовый</li>
+        <li>5) сделать чтобы по кнопкам не выпадал шар, а запускался таймер с автовыпадением, красных-раз в 3 секунды,
+            синих-раз в секунду с 50% вероятности, зелёных по две штуки с вероятностью 25% раз в секунду.</li>
+    </ul>
+</div>
