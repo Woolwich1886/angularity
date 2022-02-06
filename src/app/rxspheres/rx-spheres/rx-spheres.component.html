@@ -1,8 +1,8 @@
-<button class="red" (click)="isRedPushing = !isRedPushing">Red sphere</button>
-<button class="blue" (click)="isBluePushing = !isBluePushing">Blue sphere</button>
-<button class="green" (click)="isGreenPushing = !isGreenPushing">Green sphere</button>
+<button class="red" (click)="service.turnRedFlow()">Red sphere</button>
+<button class="blue" (click)="service.turnBlueFlow()">Blue sphere</button>
+<button class="green" (click)="service.turnGreenFlow()">Green sphere</button>
 <div class="sphere-log">Log
-    <ng-container *ngFor="let l of logging">
+    <ng-container *ngFor="let l of logging$ | async">
         <p>{{ l }}</p>
     </ng-container>
 </div>
@@ -11,7 +11,7 @@
         <app-numeric-sphere [sphereData]="s"></app-numeric-sphere>
     </ng-container>
 </div>
-<button (click)="clearAndStop()">Clear and stop</button>
+<button (click)="service.clearAndStop()">Clear and stop</button>
 <div class="rules">
     <p>на странице есть три кнопки:</p>
     <p>Вызывают красный синий и зелёный шар со случайным номером от 1го до 10ти соответственно

@@ -1,34 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TaskPriority } from '../enums/task-priority-enum';
 import { ToDoTask } from '../models/to-do-task-model';
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent implements OnInit {
 
-  toDoList: ToDoTask[] = [
-    { 'name': 'Выучить Ангуляр', 'priority': TaskPriority.high, 'isDone': false },
-    { 'name': 'Закрыть ипотеку', 'priority': TaskPriority.low, 'isDone': false },
-    { 'name': 'Погладить кота', 'priority': TaskPriority.high, 'isDone': true },
-    { 'name': 'Обработать раны после кота', 'priority': TaskPriority.medium, 'isDone': false },
-  ];
-
   toDo$: Observable<ToDoTask[]>;
 
-  constructor() { }
+  constructor(private service: TodoService) { }
 
   ngOnInit(): void {
-    this.toDo$ = of(this.toDoList);
-    console.log(this.toDoList);
+    this.toDo$ = this.service.getToDoList();
   }
 
   removeDone(): void {
-    this.toDo$ = this.toDo$.pipe(map(data => data.filter(todo => todo.isDone !== true)));
+    this.toDo$ = this.toDo$.pipe(map(data => data.filter(todo => !todo.isDone)));
   }
 
   changeToDone(todo: ToDoTask): void {
@@ -36,8 +29,6 @@ export class TodoComponent implements OnInit {
   }
 
   addToDo(todo: ToDoTask): void {
-    this.toDo$.subscribe(next => this.toDoList = next).unsubscribe();
-    this.toDoList.push(todo);
-    this.toDo$ = of(this.toDoList);
+    this.service.addTaskToList(todo);
   }
 }

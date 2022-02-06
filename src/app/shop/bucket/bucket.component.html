@@ -1,11 +1,11 @@
-<ng-container *ngIf="bucketList.length; else elseBlock">
-    <p class="bucket-title">Товара на сумму: {{ totalCost | number:'1.2-2'}} рублей</p>
+<ng-container *ngIf="(bucketList$ | async)?.length; else elseBlock">
+    <p class="bucket-title">Товара на сумму: {{ totalCost$ | async | number:'1.2-2'}} рублей</p>
 </ng-container>
 <ng-template #elseBlock>
     <p class="bucket-title">Корзина Пуста</p>
 </ng-template>
 
-<div class="product" *ngFor="let b of bucketList">
+<div class="product" *ngFor="let b of bucketList$ | async">
     <p>Наименование: {{ b.product.name }}</p>
     <p>Цена за шт: {{ b.product.cost | number:'1.2-2'}}</p>
     <p>Количество: {{ b.quantity }}</p>

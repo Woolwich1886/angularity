@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TestComponent } from './test.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { TestComponent } from './test.component';
+import { TestService } from './test.service';
 
 
 
@@ -11,6 +11,9 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     BrowserModule
+  ],
+  providers: [
+    TestService,
   ]
 })
 export class TestModule { }

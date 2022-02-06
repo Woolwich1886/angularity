@@ -1,32 +1,27 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BucketProduct } from 'src/app/models/bucket-product-model';
 import { Product } from 'src/app/models/product-model';
+import { ProductListService } from './product-list.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnInit {
 
-  @Output()
-  productToBucket: EventEmitter<Product> = new EventEmitter<Product>()
+  tobu$: Observable<BucketProduct[]>;
+  products$: Observable<Product[]>;
 
-  productList: Product[] = [
-    {'name': 'Rubik\'s cube', 'cost': 550},
-    {'name': 'Gray shirt', 'cost': 699.99},
-    {'name': 'Handmade Mask "Covid, please stop"', 'cost': 50},
-    {'name': 'Pen', 'cost': 15.5}
-  ]
-  products$: Observable<Product[]> 
-
-  constructor() { }
+  constructor(private service: ProductListService) { }
 
   ngOnInit(): void {
-    this.products$ = of(this.productList)
+    this.products$ = this.service.getProducts();
   }
 
   addToBucket(product: Product): void {
-    this.productToBucket.emit(product)
+    this.service.addProduct(product);
   }
 }

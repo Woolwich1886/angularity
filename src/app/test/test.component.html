@@ -1,5 +1,5 @@
-<ng-container *ngIf="isFinished">
-    <p>{{ res$ | async }}</p>
+<ng-container *ngIf="isFinished | async">
+    <p>{{ amount$ | async }}</p>
 </ng-container>
 <ng-container *ngFor="let q of questions$ | async">
     <div class="question">

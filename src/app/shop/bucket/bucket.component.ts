@@ -1,53 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { BucketProduct } from 'src/app/models/bucket-product-model';
-import { Product } from 'src/app/models/product-model';
+import { BucketService } from './bucket.service';
 
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
   styleUrls: ['./bucket.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BucketComponent implements OnInit {
+export class BucketComponent implements OnInit, OnChanges {
 
-  totalCost: number;
-  bucketList: BucketProduct[];
-  productToBuyList: Product[];
+  totalCost$: Observable<number>;
+  bucketList$: Observable<BucketProduct[]>;
 
-  constructor() { }
+  constructor(private service: BucketService) { }
 
   ngOnInit(): void {
-    this.totalCost = 0;
-    this.bucketList = [];
-    this.productToBuyList = [];
+    //TODO: использовать ngForm и FormArray, имплементация ControlValueAccessor???
+    this.bucketList$ = this.service.getBucketList();
+    this.totalCost$ = this.bucketList$.pipe(
+      map(data => data.reduce(
+        (acc, curr) => acc + (curr.product.cost ? curr.product.cost * curr.quantity : 0), 0
+      )));
   }
 
-  convertToBucketProduct(product: Product) {
-    console.log(product)
-    if (this.productToBuyList.includes(product)) {
-      alert(`Продукт ${product.name} уже в корзине вообще то`)
-    }
-    else {
-      const productToBuy: BucketProduct = {
-        'product': product, 'quantity': 1
-      }
-      this.bucketList.push(productToBuy)
-      this.productToBuyList.push(product)
-      product.cost ? this.totalCost += product.cost : null
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   increaseQuantity(bucketProduct: BucketProduct): void {
-    bucketProduct.quantity += 1;
-    bucketProduct.product.cost ? this.totalCost += bucketProduct.product.cost : null
+    this.service.increaseQuantity(bucketProduct);
   }
 
   decreaseQuantity(bucketProduct: BucketProduct): void {
-    bucketProduct.quantity -= 1;
-    bucketProduct.product.cost ? this.totalCost -= bucketProduct.product.cost : null
-    if (bucketProduct.quantity < 1) {
-      this.bucketList = this.bucketList.filter(x => x !== bucketProduct);
-      this.productToBuyList = this.productToBuyList.filter(x => x !== bucketProduct.product);
-    }
+    this.service.decreaseQuantity(bucketProduct);
+  }
+  addtt() {
+    this.service.convertToBucketProduct({ 'name': 'asdasda', 'cost': 151 });
   }
 
 }
