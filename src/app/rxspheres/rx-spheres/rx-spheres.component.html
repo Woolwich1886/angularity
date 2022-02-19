@@ -1,13 +1,22 @@
+<ng-container *ngIf="{color: colorFlow$ | async, white: whiteFLow$ | async}"></ng-container>
 <button class="red" (click)="service.turnRedFlow()">Red sphere</button>
 <button class="blue" (click)="service.turnBlueFlow()">Blue sphere</button>
 <button class="green" (click)="service.turnGreenFlow()">Green sphere</button>
-<div class="sphere-log">Log
-    <ng-container *ngFor="let l of logging$ | async">
-        <p>{{ l }}</p>
-    </ng-container>
+<div class="log-result-block">
+    <div class="sphere-log">Log
+        <ng-container *ngFor="let l of logging$ | async">
+            <p>{{ l }}</p>
+        </ng-container>
+    </div>
+    <div class="result">
+        <div class="block" *ngFor="let r of result$ |async">
+            <app-numeric-sphere [sphereData]="r.sphere"></app-numeric-sphere>
+            <p> = {{ r.summary }}</p>
+        </div>
+    </div>
 </div>
 <div class="sphere-container">Container
-    <ng-container *ngFor="let s of rxSpheres$ | async">
+    <ng-container *ngFor="let s of mainFlow$ | async">
         <app-numeric-sphere [sphereData]="s"></app-numeric-sphere>
     </ng-container>
 </div>
@@ -16,8 +25,7 @@
     <p>на странице есть три кнопки:</p>
     <p>Вызывают красный синий и зелёный шар со случайным номером от 1го до 10ти соответственно
         также есть контейнер где отображаются выпавшие шары
-        и кнопка которая читит этот контейнер
-        (TODO: внизу подбита сумма и количество по цветам)</p>
+        и кнопка которая читит этот контейнер</p>
 
     <p>допусловия:</p>
     <ul>

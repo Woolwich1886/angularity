@@ -35,8 +35,9 @@ button.clear {
 .sphere-container {
     grid-row: 2/5;
     grid-column: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
     border: solid 2px black;
     margin: 10px;
     height: 700px;
@@ -46,15 +47,38 @@ button.clear {
 .sphere-log {
     grid-column: 1;
     grid-row: 2/5;
-    height: 700px;
+    height: 400px;
     overflow: auto;
+    border: solid 2px black;
+    margin: 10px;
 }
 
 .rules {
     grid-column: 3;
-    grid-row: 3;
+    grid-row: 3/5;
     border: solid 2px black;
     padding: 5px;
     margin: 10px;
     height: fit-content;
+}
+
+.log-result-block {
+    grid-column: 1;
+    grid-row: 2/5;
+}
+
+.result {
+    border: solid 2px black;
+    margin: 10px;
+    height: 400px;
+    overflow: auto;
+}
+
+.block p {
+    font-size: 35px;
+    margin-top: 5px;
+}
+
+.result .block {
+    display: flex;
 }

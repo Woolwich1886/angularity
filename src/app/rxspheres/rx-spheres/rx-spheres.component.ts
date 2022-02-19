@@ -11,17 +11,19 @@ import { SpheresService } from '../spheres.service';
 })
 export class RxSpheresComponent implements OnInit {
 
-  rxSpheres$: Observable<NumericSphere[]>;
+  mainFlow$: Observable<NumericSphere[]>;
+  colorFlow$: Observable<NumericSphere>;
+  whiteFLow$: Observable<NumericSphere | undefined>;
+  result$: Observable<any | undefined>;
   logging$: Observable<string[]>;
 
   constructor(public service: SpheresService) { }
 
   ngOnInit(): void {
     this.logging$ = this.service.getLog();
-    this.rxSpheres$ = this.service.getMainFlow();
-    //TODO: подсчет итоговых значений
+    this.mainFlow$ = this.service.getMainFlow();
+    this.colorFlow$ = this.service.getColorFlow();
+    this.whiteFLow$ = this.service.getWhiteFlow();
+    this.result$ = this.service.getResults();
   }
-
-
-
 }
